@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Segmentation Analysis</title>
+    <link rel="icon" type="image/png" href="LOGOW.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              gradient1: "#f8e8dc",
+              gradient2: "#bdd4e7",
+              gradient3: "#fbc2eb",
+              gradient4: "#a6c0fe",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Background Gradient */
+      .gradient-bg {
+        background: linear-gradient(
+          135deg,
+          rgba(248, 232, 220, 1) 0%,
+          rgba(189, 212, 231, 1) 40%,
+          rgba(251, 194, 235, 1) 70%,
+          rgba(166, 192, 254, 1) 100%
+        );
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      /* Noise Overlay */
+      .noise-overlay {
+        background: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+        opacity: 0.15;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      /* Card Hover Effect */
+      .card-hover:hover {
+        transform: scale(1.03);
+        transition: all 0.3s ease-in-out;
+      }
+    </style>
+  </head>
+  <body class="relative text-gray-900 min-h-screen">
+    <!-- Background -->
+    <div class="absolute inset-0 gradient-bg"></div>
+    <div class="absolute inset-0 noise-overlay"></div>
+
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <!-- Header -->
+    <header
+      x-data="{ open: false, lastScroll: 0, visible: true }"
+      x-init="
+        window.addEventListener('scroll', () => {
+          let currentScroll = window.pageYOffset;
+          visible = (currentScroll < lastScroll) || (currentScroll < 50);
+          lastScroll = currentScroll;
+        });
+      "
+      x-bind:class="visible ? 'translate-y-0 opacity-100' : '-translate-y-20 opacity-0'"
+      class="w-full py-4 bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 bg-opacity-80 backdrop-blur-lg shadow-lg fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out"
+    >
+      <nav class="container mx-auto flex justify-between items-center px-6">
+        <!-- Logo -->
+        <h1 class="text-xl font-bold text-shadow">Wahyudiyanto</h1>
+
+        <!-- Desktop Menu -->
+        <ul class="hidden md:flex gap-6 text-gray-900 font-semibold">
+          <li>
+            <a
+              href="/porto_web/index.html"
+              class="hover:text-gray-600 transition"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="/porto_web/portfolio.html"
+              class="hover:text-gray-600 transition"
+              >Portfolio</a
+            >
+          </li>
+          <li>
+            <a
+              href="/porto_web/resume.html"
+              class="hover:text-gray-600 transition"
+              >Resume</a
+            >
+          </li>
+          <li>
+            <a
+              href="/porto_web/activity.html"
+              class="hover:text-gray-600 transition"
+              >Activity</a
+            >
+          </li>
+          <li>
+            <a
+              href="/porto_web/contact.html"
+              class="hover:text-gray-600 transition"
+              >Contact</a
+            >
+          </li>
+        </ul>
+
+        <!-- Mobile Menu Button -->
+        <button
+          @click="open = !open"
+          class="md:hidden text-gray-900 focus:outline-none z-50 relative"
+        >
+          <svg
+            x-show="!open"
+            class="w-8 h-8"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            ></path>
+          </svg>
+        </button>
+      </nav>
+
+      <!-- Mobile Menu (Dynamic Island Effect) -->
+      <div
+        x-show="open"
+        @click.away="open = false"
+        class="fixed top-3 left-1/2 transform -translate-x-1/2 w-[90%] max-w-lg bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 shadow-lg rounded-full z-50 transition-all duration-300 ease-in-out"
+        x-transition:enter="transform transition ease-out duration-300"
+        x-transition:enter-start="scale-50 opacity-0"
+        x-transition:enter-end="scale-100 opacity-100"
+        x-transition:leave="transform transition ease-in duration-300"
+        x-transition:leave-start="scale-100 opacity-100"
+        x-transition:leave-end="scale-50 opacity-0"
+      >
+        <nav class="px-3 py-2">
+          <ul
+            class="flex flex-row justify-center gap-6 text-gray-900 text-lg font-semibold"
+          >
+            <li>
+              <a
+                href="/porto_web/index.html"
+                @click="open = false"
+                class="hover:text-gray-600 transition"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a
+                href="/porto_web/portfolio.html"
+                @click="open = false"
+                class="hover:text-gray-600 transition"
+                >Portfolio</a
+              >
+            </li>
+            <li>
+              <a
+                href="/porto_web/resume.html"
+                @click="open = false"
+                class="hover:text-gray-600 transition"
+                >Resume</a
+              >
+            </li>
+            <li>
+              <a
+                href="/porto_web/activity.html"
+                @click="open = false"
+                class="hover:text-gray-600 transition"
+                >Activity</a
+              >
+            </li>
+            <li>
+              <a
+                href="/porto_web/contact.html"
+                @click="open = false"
+                class="hover:text-gray-600 transition"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto py-20 px-4 md:px-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-900">
+        📊 Customer Segmentation Analysis
+      </h2>
+
+      <!-- Section: About the Dataset -->
+      <section class="mb-12">
+        <h3
+          class="text-2xl font-semibold mb-4 text-gray-900 text-center md:text-left"
+        >
+          🗂️ About the Dataset
+        </h3>
+        <p
+          class="text-gray-700 max-w-3xl mx-auto text-lg text-center md:text-left"
+        >
+          The dataset titled <strong>"Shop Customer Data"</strong> contains
+          <strong>2,000 records</strong> and provides insights into an imaginary
+          shop’s customer base. It includes
+          <strong>Age, Annual Income, and Spending Score</strong>, which were
+          used for segmentation analysis.
+        </p>
+      </section>
+
+      <!-- Section: Elbow Method -->
+      <section class="mb-12">
+        <h3
+          class="text-2xl font-semibold mb-4 text-gray-900 text-center md:text-left"
+        >
+          📈 Optimal Number of Clusters (Elbow Method)
+        </h3>
+        <p
+          class="text-gray-700 max-w-3xl mx-auto text-lg text-center md:text-left"
+        >
+          The <strong>Elbow Method</strong> helps determine the ideal number of
+          clusters (k). The "elbow" at <strong>k = 5</strong> suggests that this
+          is the optimal choice, balancing compact clusters and minimal
+          distortion.
+        </p>
+
+        <!-- Responsive Image -->
+        <div
+          class="w-full max-w-4xl mx-auto mt-6 rounded-lg overflow-hidden shadow-lg"
+        >
+          <img
+            src="/porto_web/src/assets/portfolio/elbow_method.png"
+            alt="Elbow Method"
+          />
+        </div>
+
+        <!-- Expandable Code -->
+        <details class="bg-white p-4 rounded-lg mt-6 shadow-md">
+          <summary class="cursor-pointer font-semibold text-gray-900">
+            View Code
+          </summary>
+          <pre
+            class="bg-gray-900 text-gray-300 p-4 rounded-lg overflow-auto mt-4 text-sm"
+          >
+<code>
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+
+scaler = StandardScaler()
+data_scaled = scaler.fit_transform(customers_data[['Age', 'Annual Income ($)', 'Spending Score (1-100)']])
+
+inertia = []
+k_values = range(1, 11)
+for k in k_values:
+    kmeans = KMeans(n_clusters=k, random_state=42)
+    kmeans.fit(data_scaled)
+    inertia.append(kmeans.inertia_)
+
+plt.figure(figsize=(10, 6))
+plt.plot(k_values, inertia, marker='o', color='b')
+plt.title('Elbow Method for Optimal K')
+plt.xlabel('Number of Clusters (k)')
+plt.ylabel('Inertia')
+plt.grid()
+plt.show()
+</code>
+      </pre>
+        </details>
+      </section>
+
+      <!-- Section: Cluster Visualization -->
+      <section class="mb-12">
+        <h3
+          class="text-2xl font-semibold mb-4 text-gray-900 text-center md:text-left"
+        >
+          📍 Cluster Visualization: Age vs Spending Score
+        </h3>
+        <p
+          class="text-gray-700 max-w-3xl mx-auto text-lg text-center md:text-left"
+        >
+          This scatter plot shows how customers are segmented based on
+          <strong>Age</strong> and <strong>Spending Score</strong>. The
+          algorithm forms <strong>5 distinct groups</strong>, representing
+          different shopping behaviors.
+        </p>
+
+        <!-- Responsive Image -->
+        <div
+          class="w-full max-w-4xl mx-auto mt-6 rounded-lg overflow-hidden shadow-lg"
+        >
+          <img
+            src="/porto_web/src/assets/portfolio/age_vs_spending_score.png"
+            alt="Age vs Spending Score"
+          />
+        </div>
+
+        <!-- Expandable Code -->
+        <details class="bg-white p-4 rounded-lg mt-6 shadow-md">
+          <summary class="cursor-pointer font-semibold text-gray-900">
+            View Code
+          </summary>
+          <pre
+            class="bg-gray-900 text-gray-300 p-4 rounded-lg overflow-auto mt-4 text-sm"
+          >
+<code>
+from sklearn.cluster import KMeans
+
+kmeans = KMeans(n_clusters=5, random_state=42)
+clusters = kmeans.fit_predict(data_scaled)
+
+customers_data['Cluster'] = clusters
+
+plt.figure(figsize=(10, 6))
+for cluster in range(5):
+    cluster_points = data_scaled[clusters == cluster]
+    plt.scatter(cluster_points[:, 0], cluster_points[:, 2], label=f'Cluster {cluster}', alpha=0.6)
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 2], color='red', marker='X', s=200, label='Centroids')
+plt.title('Customer Clusters: Age vs Spending Score')
+plt.xlabel('Age (Standardized)')
+plt.ylabel('Spending Score (Standardized)')
+plt.legend()
+plt.grid()
+plt.show()
+</code>
+      </pre>
+        </details>
+      </section>
+
+      <!-- Section: Boxplots -->
+      <section class="mb-12">
+        <h3
+          class="text-2xl font-semibold mb-4 text-gray-900 text-center md:text-left"
+        >
+          📊 Attribute Distribution by Cluster
+        </h3>
+        <p
+          class="text-gray-700 max-w-3xl mx-auto text-lg text-center md:text-left"
+        >
+          The following <strong>boxplots</strong> show how
+          <strong>Age, Annual Income, and Spending Score</strong> vary across
+          different customer segments.
+        </p>
+
+        <!-- Responsive Image Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+          <div class="rounded-lg overflow-hidden shadow-lg">
+            <img
+              src="/porto_web/src/assets/portfolio/boxplot_age.png"
+              alt="Boxplot: Age"
+            />
+          </div>
+          <div class="rounded-lg overflow-hidden shadow-lg">
+            <img
+              src="/porto_web/src/assets/portfolio/boxplot_income.png"
+              alt="Boxplot: Annual Income"
+            />
+          </div>
+          <div class="rounded-lg overflow-hidden shadow-lg">
+            <img
+              src="/porto_web/src/assets/portfolio/boxplot_spending_score.png"
+              alt="Boxplot: Spending Score"
+            />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="w-full py-4 bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 bg-opacity-80 backdrop-blur-lg text-center text-gray-700 mt-10"
+    >
+      <p>&copy; 2025 Wahyudiyanto | All Rights Reserved</p>
+      <a href="home.html" class="text-blue-500 hover:underline">Back to Home</a>
+    </footer>
+  </body>
+</html>
