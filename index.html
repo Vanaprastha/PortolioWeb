@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vana Prastha HomePage</title>
+    <link rel="icon" type="image/png" href="LOGOW.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ffffff",  /* Putih */
+              secondary: "#b2ff59", /* Hijau Melon */
+              accent: "#a8e6cf",   /* Warna hijau lembut */
+              gradient1: "#f3f4f6", /* Warna netral */
+              gradient2: "#b2ff59", /* Hijau Melon */
+              gradient3: "#dcfce7", /* Hijau pastel */
+              gradient4: "#d1fae5", /* Hijau muda */
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Background Gradient */
+      .gradient-bg {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 1) 0%,  /* Putih */
+          rgba(178, 255, 89, 1) 40%,   /* Hijau Melon */
+          rgba(178, 255, 89, 1) 70%,   /* Hijau Melon */
+          rgba(255, 255, 255, 1) 100%   /* Putih */
+        );
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+      /* Noise Overlay */
+      .noise-overlay {
+        background: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+        opacity: 0.15;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      /* Smooth hover animation */
+      .hover-gradient {
+        transition: all 0.3s ease-in-out;
+      }
+      .hover-gradient:hover {
+        transform: scale(1.05);
+      }
+    </style>
+    <style>
+      /* Animasi Pop-up */
+      #chatbot-popup {
+        transition: transform 0.3s ease-in-out, opacity 0.3s;
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      #chatbot-popup.visible {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body class="relative text-gray-900 min-h-screen">
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <!-- Background -->
+    <div class="absolute inset-0 gradient-bg"></div>
+    <div class="absolute inset-0 noise-overlay"></div>
+
+    <!-- Header -->
+    <header
+      x-data="{ open: false, lastScroll: 0, visible: true }"
+      x-init="
+    window.addEventListener('scroll', () => {
+      let currentScroll = window.pageYOffset;
+      visible = (currentScroll < lastScroll) || (currentScroll < 50);
+      lastScroll = currentScroll;
+    });
+  "
+      x-bind:class="visible ? 'translate-y-0 opacity-100' : '-translate-y-20 opacity-0'"
+      class="w-full py-4 bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 bg-opacity-80 backdrop-blur-lg shadow-lg fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out"
+    >
+      <nav class="container mx-auto flex justify-between items-center px-6">
+        <!-- Logo & Title Wrapper -->
+        <div class="flex items-center gap-3">
+          <a href="index.html">
+            <img
+              src="Logo/LOGOW.png"
+              alt="Logo"
+              class="h-10 md:h-12 lg:h-14 w-auto"
+            />
+          </a>
+          <h1 class="text-xl font-bold text-shadow text-left">
+            About Me
+          </h1>
+        </div>
+
+        <!-- website Menu -->
+        <ul class="hidden md:flex gap-6 text-gray-900 font-semibold">
+          <li>
+            <a href="index.html" class="hover:text-gray-600 transition"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a href="resume.html" class="hover:text-gray-600 transition"
+              >Resume</a
+            >
+          </li>
+          <li>
+            <a href="portfolio.html" class="hover:text-gray-600 transition"
+              >Portfolio</a
+            >
+          </li>
+          <li>
+            <a href="activity.html" class="hover:text-gray-600 transition"
+              >My Volunteer's </a
+            >
+          </li>
+          <li>
+            <a href="contact.html" class="hover:text-gray-600 transition"
+              >Contact</a
+            >
+          </li>
+        </ul>
+
+        <!-- Mobile Menu Button -->
+        <button
+          @click="open = !open"
+          class="md:hidden text-gray-900 focus:outline-none z-50 relative"
+        >
+          <svg
+            x-show="!open"
+            class="w-8 h-8"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            ></path>
+          </svg>
+        </button>
+      </nav>
+
+      <!-- Mobile Menu (Dynamic Island Effect) -->
+      <div
+        x-show="open"
+        @click.away="open = false"
+        class="fixed top-3 left-1/2 transform -translate-x-1/2 w-[90%] max-w-lg bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 shadow-lg rounded-full z-50 transition-all duration-300 ease-in-out"
+        x-transition:enter="transform transition ease-out duration-300"
+        x-transition:enter-start="scale-50 opacity-0"
+        x-transition:enter-end="scale-100 opacity-100"
+        x-transition:leave="transform transition ease-in duration-300"
+        x-transition:leave-start="scale-100 opacity-100"
+        x-transition:leave-end="scale-50 opacity-0"
+      >
+        <nav class="px-3 py-2">
+          <ul
+            class="flex flex-row justify-center gap-6 text-gray-900 text-lg font-semibold"
+          >
+            <li>
+              <a
+                href="index.html"
+                @click="open = false"
+                class="hover:text-gray-600 transition"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a
+                href="portfolio.html"
+                @click="open = false"
+                class="hover:text-gray-600 transition"
+                >Portfolio</a
+              >
+            </li>
+            <li>
+              <a
+                href="resume.html"
+                @click="open = false"
+                class="hover:text-gray-600 transition"
+                >Resume</a
+              >
+            </li>
+            <li>
+              <a
+                href="activity.html"
+                @click="open = false"
+                class="hover:text-gray-600 transition"
+                >Activity</a
+              >
+            </li>
+            <li>
+              <a
+                href="contact.html"
+                @click="open = false"
+                class="hover:text-gray-600 transition"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <!-- Chatbot Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+      <button
+        id="chatbot-button"
+        class="bg-gradient-to-r from-gradient3 to-gradient4 hover:from-gradient4 hover:to-gradient3 text-gray-900 font-semibold py-3 px-6 rounded-full shadow-lg hover-gradient flex items-center gap-2"
+      >
+        <i class="fas fa-comment-dots"></i> Ask Chatbot about Me :)
+      </button>
+    </div>
+
+    <!-- Chatbot Popup -->
+    <div
+      id="chatbot-popup"
+      class="fixed bottom-24 right-6 w-96 max-w-full bg-white rounded-lg shadow-lg flex flex-col hidden"
+      style="height: 70vh; z-index: 100"
+    >
+      <!-- Chat Header -->
+      <div
+        class="bg-gradient-to-r from-gradient3 to-gradient4 text-white p-4 rounded-t-lg flex justify-between items-center"
+      >
+        <h3 class="font-semibold">Wade</h3>
+        <button id="close-chatbot" class="text-white hover:text-gray-200">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <!-- Chat Messages -->
+      <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-gray-50">
+        <!-- Pesan default -->
+        <div class="text-center text-gray-500">
+          Hi! I'm Wade, Vana Prastha's personal AI. You can ask me anything about Him,
+          or ask me a general question and I'll try to answer it!
+        </div>
+        <!-- Loading indicator -->
+        <div id="loading" class="text-center hidden">
+          <i class="fas fa-spinner fa-spin"></i> Connecting to server...
+        </div>
+      </div>
+
+      <!-- Chat Input -->
+      <div class="p-4 bg-gray-100 rounded-b-lg">
+        <div class="flex gap-2">
+          <input
+            id="chat-input"
+            type="text"
+            class="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-gradient3"
+            placeholder="Type a message..."
+          />
+          <button
+            id="send-message"
+            class="bg-gradient-to-r from-gradient3 to-gradient4 hover:from-gradient4 hover:to-gradient3 text-white font-semibold px-4 rounded-lg"
+          >
+            Send
+          </button>
+        </div>
+        <!-- Rekomendasi Pertanyaan -->
+        <div id="suggestions" class="mt-2 flex flex-wrap gap-2">
+          <button
+            class="suggestion-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-300"
+          >
+            Who is Vana Prastha?
+          </button>
+          <button
+            class="suggestion-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-300"
+          >
+            What are Vana Prastha's skills?
+          </button>
+          <button
+            class="suggestion-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-300"
+          >
+            What projects has Vana Prastha worked on?
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const chatbotButton = document.getElementById("chatbot-button");
+        const chatbotPopup = document.getElementById("chatbot-popup");
+        const closeChatbot = document.getElementById("close-chatbot");
+        const chatInput = document.getElementById("chat-input");
+        const sendMessageButton = document.getElementById("send-message");
+        const chatMessages = document.getElementById("chat-messages");
+        const suggestionButtons = document.querySelectorAll(".suggestion-btn");
+        const loadingElement = document.getElementById("loading");
+
+        // Toggle chatbot popup
+        chatbotButton.addEventListener("click", () => {
+          chatbotPopup.classList.toggle("visible");
+          chatbotPopup.classList.toggle("hidden");
+        });
+
+        // Close chatbot popup
+        closeChatbot.addEventListener("click", () => {
+          chatbotPopup.classList.remove("visible");
+          chatbotPopup.classList.add("hidden");
+        });
+
+        // Send message
+        sendMessageButton.addEventListener("click", sendMessage);
+        chatInput.addEventListener("keypress", function (event) {
+          if (event.key === "Enter") {
+            sendMessage();
+          }
+        });
+
+        // Suggestion buttons
+        suggestionButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            chatInput.value = this.innerText;
+            sendMessage();
+          });
+        });
+
+        // Function to send message
+        const API_URL = "https://portfolio-Vana Prastha-website.onrender.com/chatbot";
+        async function sendMessage() {
+          const message = chatInput.value.trim();
+          if (!message) return;
+
+          // Add user message to chat
+          chatMessages.innerHTML += `
+        <div class="text-right mb-2">
+          <div class="inline-block bg-gradient-to-r from-gradient3 to-gradient4 text-white p-2 rounded-lg">
+            ${message}
+          </div>
+        </div>
+      `;
+          chatInput.value = "";
+
+          // Show loading indicator
+          loadingElement.classList.remove("hidden");
+
+          // Send message to backend
+          try {
+            const response = await fetch(API_URL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ message: message }),
+            });
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            // Hide loading indicator
+            loadingElement.classList.add("hidden");
+
+            // Add bot response to chat
+            chatMessages.innerHTML += `
+          <div class="text-left mb-2">
+            <div class="inline-block bg-gray-200 text-gray-900 p-2 rounded-lg">
+              ${data.response}
+            </div>
+          </div>
+        `;
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          } catch (error) {
+            console.error("Error:", error);
+            // Hide loading indicator
+            loadingElement.classList.add("hidden");
+
+            chatMessages.innerHTML += `
+          <div class="text-left mb-2">
+            <div class="inline-block bg-red-100 text-red-900 p-2 rounded-lg">
+              Error: Could not connect to the server. Please try again later.
+            </div>
+          </div>
+        `;
+          }
+        }
+      });
+    </script>
+
+    <!-- Hero Section -->
+    <section
+      class="lg:pt-32 md:pt-28 pt-24 pb-12 px-6 md:px-12 min-h-screen flex flex-col md:flex-row items-center justify-center text-center md:text-left"
+    >
+      <!-- Profile Image -->
+      <div class="w-full md:w-1/2 flex justify-center">
+        <div
+          class="relative w-[100%] max-w-xs md:max-w-md rounded-xl shadow-lg overflow-hidden"
+        >
+          <img
+            src="assets/ProfilePicture/1.jpeg"
+            alt="Pr"
+            class="w-full h-auto object-cover"
+          />
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="w-full md:w-1/2 mt-8 md:mt-0">
+        <h2 class="text-lg md:text-xl text-gray-700 text-shadow">
+          Hello, It's Me
+        </h2>
+        <h1
+          class="font-extrabold text-gray-900 mt-2 text-shadow"
+          style="font-size: clamp(2rem, 5vw, 4rem)"
+        >
+          Vana Prastha 
+        </h1>
+        <h3 class="text-xl md:text-2xl text-gray-700 mt-2 text-shadow">
+          And I'm a <span class="text-gray-900">Applied Data Science Student</span>
+        </h3>
+
+        <p
+          class="text-gray-800 mt-4 max-w-lg mx-auto md:mx-0 leading-relaxed text-shadow"
+        >
+        I'am a 4th semester student at 
+          <a
+            href="https://www.pens.ac.id/"
+            class="text-blue-500 hover:underline"
+          >
+            Politeknik Elektronika Negeri Surabaya</a
+          >. I have a fairly good educational background in processing data, 
+          analyzing data and developing artificial intelligence models.
+        </p>
+
+        <p class="text-gray-800 mt-4 max-w-lg mx-auto md:mx-0 text-shadow">
+          besides focusing on academics, I am also active in various 
+          activities and organizations, especially student activities 
+          and volunteer activities based on strong responsibility 
+          for what has been assigned to me.In addition to academics, 
+          <strong class="text-gray-700"> 
+            during my studies I was also want committed to being able to contribute back to 
+            society by dedicating the knowledge I have. </strong
+          >
+        </p>
+
+        <p class="text-gray-800 mt-4 max-w-lg mx-auto md:mx-0 text-shadow">
+          Reflecting on what I have done so far, I always want to continue learning, 
+          seeking experience, and contributing to society for better self-development.
+          <strong class="text-gray-700">how much I don't know</strong>. That’s
+          what keeps me going.
+        </p>
+
+        <!-- Hire Me Button -->
+        <a
+          href="contact.html"
+          class="mt-6 inline-block px-6 py-3 bg-gradient-to-r from-gradient3 to-gradient4 hover:from-gradient4 hover:to-gradient3 rounded-lg text-gray-900 font-semibold transition duration-300 shadow-md hover-gradient"
+        >
+          Let's Connect
+        </a>
+
+        <!-- Social Links -->
+        <div class="mt-4 flex gap-4 justify-center md:justify-start">
+          <p class="text-gray-600 text-shadow">Join Me</p>
+          <a
+            href="https://www.linkedin.com/in/vana-prastha"
+            class="text-gray-500 hover:text-gray-900 transition text-shadow"
+          >
+            <i class="fab fa-linkedin"></i> LinkedIn
+          </a>
+          <a
+            href="https://github.com/Vanaprastha"
+            class="text-gray-500 hover:text-gray-900 transition text-shadow"
+          >
+            <i class="fab fa-github"></i> GitHub
+          </a>
+          <a
+            href="https://www.instagram.com/vanaprstha_/"
+            class="text-gray-500 hover:text-gray-900 transition text-shadow"
+          >
+            <i class="fab fa-instagram"></i> Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="w-full py-4 bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 bg-opacity-80 backdrop-blur-lg text-center text-gray-700 mt-10"
+    >
+      <p>&copy; 2025 Vana Prastha | All Rights Reserved</p>
+    </footer>
+  </body>
+</html>
+
