@@ -64,164 +64,127 @@
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
 
-    <!-- Header -->
-    <header
-      x-data="{ open: false, lastScroll: 0, visible: true }"
-      x-init="
+<!-- Header -->
+<header
+  x-data="{ open: false, lastScroll: 0, visible: true }"
+  x-init="
+    // Event listener untuk scroll
     window.addEventListener('scroll', () => {
       let currentScroll = window.pageYOffset;
       visible = (currentScroll < lastScroll) || (currentScroll < 50);
       lastScroll = currentScroll;
     });
+    // Event listener untuk resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) { 
+        open = false;
+      }
+    });
   "
-      x-bind:class="visible ? 'translate-y-0 opacity-100' : '-translate-y-20 opacity-0'"
-      class="w-full py-4 bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 bg-opacity-80 backdrop-blur-lg shadow-lg fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out"
+  x-bind:class="visible ? 'translate-y-0 opacity-100' : '-translate-y-20 opacity-0'"
+  class="w-full py-4 bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 bg-opacity-80 backdrop-blur-lg shadow-lg fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out"
+>
+  <nav class="container mx-auto flex justify-between items-center px-6">
+    <!-- Logo & Title Wrapper -->
+    <div class="flex items-center gap-3">
+      <a href="index.html">
+        <img
+          src="Logo/LOGO.png"
+          alt="Logo"
+          class="h-10 md:h-12 lg:h-14 w-auto"
+        />
+      </a>
+      <h1 class="text-xl font-bold text-shadow text-left">
+        Volunteer's Activity
+      </h1>
+    </div>
+
+    <!-- Website Menu untuk Desktop -->
+    <ul class="hidden md:flex gap-6 text-gray-900 font-semibold">
+      <li>
+        <a href="index.html" class="hover:text-gray-600 transition">Home</a>
+      </li>
+      <li>
+        <a href="resume.html" class="hover:text-gray-600 transition">Resume</a>
+      </li>
+      <li>
+        <a href="portfolio.html" class="hover:text-gray-600 transition">Portfolio</a>
+      </li>
+      <li>
+        <a href="certificates.html" class="hover:text-gray-600 transition">Certificates</a>
+      </li>
+      <li>
+        <a href="my volunteer's.html" class="hover:text-gray-600 transition">My Volunteer's</a>
+      </li>
+      <li>
+        <a href="contact.html" class="hover:text-gray-600 transition">Contact</a>
+      </li>
+    </ul>
+
+    <!-- Tombol Mobile Menu -->
+    <button
+      @click="open = !open"
+      class="md:hidden text-gray-900 focus:outline-none z-50 relative"
     >
-      <nav class="container mx-auto flex justify-between items-center px-6">
-        <!-- Logo & Title Wrapper -->
-        <div class="flex items-center gap-3">
-          <a href="index.html">
-            <img
-              src="Logo/LOGO.png"
-              alt="Logo"
-              class="h-10 md:h-12 lg:h-14 w-auto"
-            />
-          </a>
-          <h1 class="text-xl font-bold text-shadow text-left">
-            My Careeer Path
-          </h1>
-        </div>
-
-        <!-- website Menu -->
-        <ul class="hidden md:flex gap-6 text-gray-900 font-semibold">
-          <li>
-            <a href="index.html" class="hover:text-gray-600 transition"
-              >Home</a
-            >
-          </li>
-          <li>
-            <a href="resume.html" class="hover:text-gray-600 transition"
-              >Resume</a
-            >
-          </li>
-          <li>
-            <a href="portfolio.html" class="hover:text-gray-600 transition"
-              >Portfolio</a
-            >
-          </li>
-          <li>
-            <a href="certificates.html" class="hover:text-gray-600 transition"
-              >Certificates</a
-            >
-          </li>
-          <li>
-            <a href="my volunteer's.html" class="hover:text-gray-600 transition"
-              >My Volunteer's </a
-            >
-          </li>
-          <li>
-            <a href="contact.html" class="hover:text-gray-600 transition"
-              >Contact</a
-            >
-          </li>
-        </ul>
-
-        <!-- Mobile Menu Button -->
-        <button
-          @click="open = !open"
-          class="md:hidden text-gray-900 focus:outline-none z-50 relative"
-        >
-          <svg
-            x-show="!open"
-            class="w-8 h-8"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            ></path>
-          </svg>
-        </button>
-      </nav>
-
-      <!-- Mobile Menu (Dynamic Island Effect) -->
-      <div
-        x-show="open"
-        @click.away="open = false"
-        class="fixed top-3 left-1/2 transform -translate-x-1/2 w-[90%] max-w-lg bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 shadow-lg rounded-full z-50 transition-all duration-300 ease-in-out"
-        x-transition:enter="transform transition ease-out duration-300"
-        x-transition:enter-start="scale-50 opacity-0"
-        x-transition:enter-end="scale-100 opacity-100"
-        x-transition:leave="transform transition ease-in duration-300"
-        x-transition:leave-start="scale-100 opacity-100"
-        x-transition:leave-end="scale-50 opacity-0"
+      <svg
+        x-show="!open"
+        class="w-8 h-8"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <nav class="px-3 py-2">
-          <ul
-            class="flex flex-row justify-center gap-6 text-gray-900 text-lg font-semibold"
-          >
-            <li>
-              <a
-                href="index.html"
-                @click="open = false"
-                class="hover:text-gray-600 transition"
-                >Home</a
-              >
-            </li>
-            <li>
-              <a
-                href="portfolio.html"
-                @click="open = false"
-                class="hover:text-gray-600 transition"
-                >Portfolio</a
-              >
-            </li>
-            <li>
-              <a
-                href="certificates.html"
-                @click="open = false"
-                class="hover:text-gray-600 transition"
-                >Certificates</a
-              >
-            </li>
-            <li>
-              <a
-                href="resume.html"
-                @click="open = false"
-                class="hover:text-gray-600 transition"
-                >Resume</a
-              >
-            </li>
-            <li>
-              <a
-                href="my volunteer's.html"
-                @click="open = false"
-                class="hover:text-gray-600 transition"
-                >My Volunteer's</a
-              >
-            </li>
-            <li>
-              <a
-                href="contact.html"
-                @click="open = false"
-                class="hover:text-gray-600 transition"
-                >Contact</a
-              >
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16m-7 6h7"
+        ></path>
+      </svg>
+    </button>
+  </nav>
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
+  <!-- Mobile Menu (Dynamic Island Effect) -->
+  <div
+    x-show="open"
+    @click.away="open = false"
+    class="fixed top-3 left-1/2 transform -translate-x-1/2 w-[90%] max-w-lg bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 shadow-lg rounded z-50 transition-all duration-300 ease-in-out"
+    x-transition:enter="transform transition ease-out duration-300"
+    x-transition:enter-start="scale-50 opacity-0"
+    x-transition:enter-end="scale-100 opacity-100"
+    x-transition:leave="transform transition ease-in duration-300"
+    x-transition:leave-start="scale-100 opacity-100"
+    x-transition:leave-end="scale-50 opacity-0"
+  >
+    <nav class="px-3 py-2">
+      <ul class="flex flex-col justify-center gap-6 text-gray-900 text-lg font-semibold">
+        <li>
+          <a href="index.html" @click="open = false" class="hover:text-gray-600 transition">Home</a>
+        </li>
+        <li>
+          <a href="portfolio.html" @click="open = false" class="hover:text-gray-600 transition">Portfolio</a>
+        </li>
+        <li>
+          <a href="certificates.html" @click="open = false" class="hover:text-gray-600 transition">Certificates</a>
+        </li>
+        <li>
+          <a href="resume.html" @click="open = false" class="hover:text-gray-600 transition">Resume</a>
+        </li>
+        <li>
+          <a href="my volunteer's.html" @click="open = false" class="hover:text-gray-600 transition">My Volunteer’s</a>
+        </li>
+        <li>
+          <a href="contact.html" @click="open = false" class="hover:text-gray-600 transition">Contact</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+/>
 
     <!-- Chatbot Button -->
     <div class="fixed bottom-6 right-6 z-50">
