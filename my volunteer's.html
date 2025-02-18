@@ -414,7 +414,7 @@
         <!-- Activity Description -->
         <div class="mt-8 text-center max-w-3xl">
           <h3 class="text-2xl font-semibold mb-4 text-gray-900">
-            Judul
+            🏆 1st Place in Videography & Best Presentation
           </h3>
           <p class="text-gray-700">
             This event was organized by the
@@ -448,6 +448,67 @@
           </p>
         </div>
       </div>
+
+      <!-- Activity 2: Slideshow (Gambar di Atas, Deskripsi di Bawah) -->
+      <div class="flex flex-col items-center mb-20">
+        <!-- Slideshow Container -->
+        <div
+          x-data="{ currentImage: 0, images: ['activity2_1.jpg', 'activity2_2.jpg', 'activity2_3.jpg', 'activity2_4.jpg'] }"
+          class="relative w-full max-w-4xl"
+        >
+          <div
+            class="relative w-full aspect-[16/9] rounded-lg shadow-lg overflow-hidden"
+          >
+            <img
+              :src="'src/assets/activity/' + images[currentImage]"
+              loading="lazy"
+              class="w-full h-full object-cover transition-opacity duration-500 ease-in-out"
+              alt="Activity Image"
+            />
+          </div>
+
+          <!-- Left Navigation Button -->
+          <button
+            @click="currentImage = (currentImage - 1 + images.length) % images.length"
+            class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 p-3 rounded-full hover:bg-gray-600 text-white"
+          >
+            ◀
+          </button>
+
+          <!-- Right Navigation Button -->
+          <button
+            @click="currentImage = (currentImage + 1) % images.length"
+            class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 p-3 rounded-full hover:bg-gray-600 text-white"
+          >
+            ▶
+          </button>
+        </div>
+
+        <!-- Activity Description -->
+        <div class="mt-8 text-center max-w-3xl">
+          <h3 class="text-2xl font-semibold mb-4 text-gray-900">
+            🎨 Head of Creative Media Department
+          </h3>
+          <p class="text-gray-700">
+            As the <strong>Head of Creative Media</strong> at the
+            <strong>Data Science Student Association (HMSD), ITERA</strong>, I
+            led three main divisions:
+            <strong>Media & Content Specialist</strong>,
+            <strong>Publication & Documentation</strong>, and
+            <strong>Visual Design</strong>. Our team of 19 members worked
+            together to enhance the organization's branding through engaging
+            content on Instagram, TikTok, and YouTube.
+          </p>
+          <p class="text-gray-700 mt-2">
+            Throughout 2024, we successfully developed numerous creative
+            campaigns, including promotional videos, event documentation, and
+            interactive educational content to improve community engagement and
+            organizational visibility.
+          </p>
+          <p class="mt-4 text-gray-700">
+            <strong>Duration:</strong> January - November 2024
+          </p>
+        </div>
       </div>
     </main>
 
