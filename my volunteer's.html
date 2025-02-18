@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Volunteer's Activities</title>
+    <link rel="icon" type="image/png" href="LOGO.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ffffff",  /* Putih */
+              secondary: "#b2ff59", /* Hijau Melon */
+              accent: "#a8e6cf",   /* Warna hijau lembut */
+              gradient1: "#f3f4f6", /* Warna netral */
+              gradient2: "#b2ff59", /* Hijau Melon */
+              gradient3: "#dcfce7", /* Hijau pastel */
+              gradient4: "#d1fae5", /* Hijau muda */
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Background Gradient */
+      .gradient-bg {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 1) 0%,  /* Putih */
+          rgba(178, 255, 89, 1) 40%,   /* Hijau Melon */
+          rgba(178, 255, 89, 1) 70%,   /* Hijau Melon */
+          rgba(255, 255, 255, 1) 100%   /* Putih */
+        );
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      /* Noise Overlay */
+      .noise-overlay {
+        background: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+        opacity: 0.15;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+    </style>
+  </head>
+  <body class="relative text-gray-900 min-h-screen">
+    <!-- Background -->
+    <div class="absolute inset-0 gradient-bg"></div>
+    <div class="absolute inset-0 noise-overlay"></div>
+
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+<!-- Header -->
+<header
+  x-data="{ open: false, lastScroll: 0, visible: true }"
+  x-init="
+    // Event listener untuk scroll
+    window.addEventListener('scroll', () => {
+      let currentScroll = window.pageYOffset;
+      visible = (currentScroll < lastScroll) || (currentScroll < 50);
+      lastScroll = currentScroll;
+    });
+    // Event listener untuk resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) { 
+        open = false;
+      }
+    });
+  "
+  x-bind:class="visible ? 'translate-y-0 opacity-100' : '-translate-y-20 opacity-0'"
+  class="w-full py-4 bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 bg-opacity-80 backdrop-blur-lg shadow-lg fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out"
+>
+  <nav class="container mx-auto flex justify-between items-center px-6">
+    <!-- Logo & Title Wrapper -->
+    <div class="flex items-center gap-3">
+      <a href="index.html">
+        <img
+          src="Logo/LOGO.png"
+          alt="Logo"
+          class="h-10 md:h-12 lg:h-14 w-auto"
+        />
+      </a>
+      <h1 class="text-xl font-bold text-shadow text-left">
+        Volunteer's Activity
+      </h1>
+    </div>
+
+    <!-- Website Menu untuk Desktop -->
+    <ul class="hidden md:flex gap-6 text-gray-900 font-semibold">
+      <li>
+        <a href="index.html" class="hover:text-gray-600 transition">Home</a>
+      </li>
+      <li>
+        <a href="resume.html" class="hover:text-gray-600 transition">Resume</a>
+      </li>
+      <li>
+        <a href="portfolio.html" class="hover:text-gray-600 transition">Portfolio</a>
+      </li>
+      <li>
+        <a href="certificates.html" class="hover:text-gray-600 transition">Certificates</a>
+      </li>
+      <li>
+        <a href="my volunteer's.html" class="hover:text-gray-600 transition">My Volunteer's</a>
+      </li>
+      <li>
+        <a href="contact.html" class="hover:text-gray-600 transition">Contact</a>
+      </li>
+    </li>
+    <li>
+      <a href="article.html" class="hover:text-gray-600 transition">Article</a>
+    </li>
+    </ul>
+
+    <!-- Tombol Mobile Menu -->
+    <button
+      @click="open = !open"
+      class="md:hidden text-gray-900 focus:outline-none z-50 relative"
+    >
+      <svg
+        x-show="!open"
+        class="w-8 h-8"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16m-7 6h7"
+        ></path>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu (Dynamic Island Effect) -->
+  <div
+    x-show="open"
+    @click.away="open = false"
+    class="fixed top-3 left-1/2 transform -translate-x-1/2 w-[90%] max-w-lg bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 shadow-lg rounded z-50 transition-all duration-300 ease-in-out"
+    x-transition:enter="transform transition ease-out duration-300"
+    x-transition:enter-start="scale-50 opacity-0"
+    x-transition:enter-end="scale-100 opacity-100"
+    x-transition:leave="transform transition ease-in duration-300"
+    x-transition:leave-start="scale-100 opacity-100"
+    x-transition:leave-end="scale-50 opacity-0"
+  >
+    <nav class="px-3 py-2">
+      <ul class="flex flex-col justify-center gap-6 text-gray-900 text-lg font-semibold">
+        <li>
+          <a href="index.html" @click="open = false" class="hover:text-gray-600 transition">Home</a>
+        </li>
+        <li>
+          <a href="resume.html" @click="open = false" class="hover:text-gray-600 transition">Resume</a>
+        </li>
+        <li>
+          <a href="portfolio.html" @click="open = false" class="hover:text-gray-600 transition">Portfolio</a>
+        </li>
+        <li>
+          <a href="certificates.html" @click="open = false" class="hover:text-gray-600 transition">Certificates</a>
+        </li>
+        <li>
+          <a href="my volunteer's.html" @click="open = false" class="hover:text-gray-600 transition">My Volunteer’s</a>
+        </li>
+        <li>
+          <a href="article.html" @click="open = false" class="hover:text-gray-600 transition">Article</a>
+        </li>
+        <li>
+          <a href="contact.html" @click="open = false" class="hover:text-gray-600 transition">Contact</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+/>
+
+    <!-- Chatbot Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+      <button
+        id="chatbot-button"
+        class="bg-gradient-to-r from-gradient3 to-gradient4 hover:from-gradient4 hover:to-gradient3 text-gray-900 font-semibold py-3 px-6 rounded-full shadow-lg hover-gradient flex items-center gap-2"
+      >
+        <i class="fas fa-comment-dots"></i> Ask Chatbot about Me :)
+      </button>
+    </div>
+
+    <!-- Chatbot Popup -->
+    <div
+      id="chatbot-popup"
+      class="fixed bottom-24 right-6 w-96 max-w-full bg-white rounded-lg shadow-lg flex flex-col hidden"
+      style="height: 70vh; z-index: 100"
+    >
+      <!-- Chat Header -->
+      <div
+        class="bg-gradient-to-r from-gradient3 to-gradient4 text-white p-4 rounded-t-lg flex justify-between items-center"
+      >
+        <h3 class="font-semibold">Wade</h3>
+        <button id="close-chatbot" class="text-white hover:text-gray-200">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <!-- Chat Messages -->
+      <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-gray-50">
+        <!-- Pesan default -->
+        <div class="text-center text-gray-500">
+          Hi! I'm Wade, Vana Prastha's personal AI. You can ask me anything about Him,
+          or ask me a general question and I'll try to answer it!
+        </div>
+        <!-- Loading indicator -->
+        <div id="loading" class="text-center hidden">
+          <i class="fas fa-spinner fa-spin"></i> Connecting to server...
+        </div>
+      </div>
+
+      <!-- Chat Input -->
+      <div class="p-4 bg-gray-100 rounded-b-lg">
+        <div class="flex gap-2">
+          <input
+            id="chat-input"
+            type="text"
+            class="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-gradient3"
+            placeholder="Type a message..."
+          />
+          <button
+            id="send-message"
+            class="bg-gradient-to-r from-gradient3 to-gradient4 hover:from-gradient4 hover:to-gradient3 text-white font-semibold px-4 rounded-lg"
+          >
+            Send
+          </button>
+        </div>
+        <!-- Rekomendasi Pertanyaan -->
+        <div id="suggestions" class="mt-2 flex flex-wrap gap-2">
+          <button
+            class="suggestion-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-300"
+          >
+            Who is Vana Prastha?
+          </button>
+          <button
+            class="suggestion-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-300"
+          >
+            What are Vana Prastha's skills?
+          </button>
+          <button
+            class="suggestion-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-300"
+          >
+            What projects has Vana Prastha worked on?
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const chatbotButton = document.getElementById("chatbot-button");
+        const chatbotPopup = document.getElementById("chatbot-popup");
+        const closeChatbot = document.getElementById("close-chatbot");
+        const chatInput = document.getElementById("chat-input");
+        const sendMessageButton = document.getElementById("send-message");
+        const chatMessages = document.getElementById("chat-messages");
+        const suggestionButtons = document.querySelectorAll(".suggestion-btn");
+        const loadingElement = document.getElementById("loading");
+
+        // Toggle chatbot popup
+        chatbotButton.addEventListener("click", () => {
+          chatbotPopup.classList.toggle("visible");
+          chatbotPopup.classList.toggle("hidden");
+        });
+
+        // Close chatbot popup
+        closeChatbot.addEventListener("click", () => {
+          chatbotPopup.classList.remove("visible");
+          chatbotPopup.classList.add("hidden");
+        });
+
+        // Send message
+        sendMessageButton.addEventListener("click", sendMessage);
+        chatInput.addEventListener("keypress", function (event) {
+          if (event.key === "Enter") {
+            sendMessage();
+          }
+        });
+
+        // Suggestion buttons
+        suggestionButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            chatInput.value = this.innerText;
+            sendMessage();
+          });
+        });
+
+        // Function to send message
+        const API_URL = "https://portfolio-Vana Prastha-website.onrender.com/chatbot";
+        async function sendMessage() {
+          const message = chatInput.value.trim();
+          if (!message) return;
+
+          // Add user message to chat
+          chatMessages.innerHTML += `
+        <div class="text-right mb-2">
+          <div class="inline-block bg-gradient-to-r from-gradient3 to-gradient4 text-white p-2 rounded-lg">
+            ${message}
+          </div>
+        </div>
+      `;
+          chatInput.value = "";
+
+          // Show loading indicator
+          loadingElement.classList.remove("hidden");
+
+          // Send message to backend
+          try {
+            const response = await fetch(API_URL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ message: message }),
+            });
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            // Hide loading indicator
+            loadingElement.classList.add("hidden");
+
+            // Add bot response to chat
+            chatMessages.innerHTML += `
+          <div class="text-left mb-2">
+            <div class="inline-block bg-gray-200 text-gray-900 p-2 rounded-lg">
+              ${data.response}
+            </div>
+          </div>
+        `;
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          } catch (error) {
+            console.error("Error:", error);
+            // Hide loading indicator
+            loadingElement.classList.add("hidden");
+
+            chatMessages.innerHTML += `
+          <div class="text-left mb-2">
+            <div class="inline-block bg-red-100 text-red-900 p-2 rounded-lg">
+              Error: Could not connect to the server. Please try again later.
+            </div>
+          </div>
+        `;
+          }
+        }
+      });
+    </script>
+
+
+    <!-- Main Content -->
+    <main class="container mx-auto py-32 px-6 md:px-12">
+      <h2 class="text-3xl font-bold text-center mb-10 text-gray-900">
+        My Volunteer's Activies
+      </h2>
+
+      <!-- Activity 1: Slideshow (Gambar di Atas, Deskripsi di Bawah) -->
+      <div class="flex flex-col items-center mb-20">
+        <!-- Slideshow Container -->
+        <div
+          x-data="{ currentImage: 0, images: ['activity1_1.jpg', 'activity1_2.jpg', 'activity1_3.jpg'] }"
+          class="relative w-full max-w-4xl"
+        >
+          <div
+            class="relative w-full aspect-[16/9] rounded-lg shadow-lg overflow-hidden"
+          >
+            <img
+              :src="'src/assets/activity/' + images[currentImage]"
+              loading="lazy"
+              class="w-full h-full object-cover transition-opacity duration-500 ease-in-out"
+              alt="Activity Image"
+            />
+          </div>
+
+          <!-- Left Navigation Button -->
+          <button
+            @click="currentImage = (currentImage - 1 + images.length) % images.length"
+            class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 p-3 rounded-full hover:bg-gray-600 text-white"
+          >
+            ◀
+          </button>
+
+          <!-- Right Navigation Button -->
+          <button
+            @click="currentImage = (currentImage + 1) % images.length"
+            class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 p-3 rounded-full hover:bg-gray-600 text-white"
+          >
+            ▶
+          </button>
+        </div>
+
+        <!-- Activity Description -->
+        <div class="mt-8 text-center max-w-3xl">
+          <h3 class="text-2xl font-semibold mb-4 text-gray-900">
+            🏆 1st Place in Videography & Best Presentation
+          </h3>
+          <p class="text-gray-700">
+            This event was organized by the
+            <strong>Pertamina Workers Union, Marketing Unit III</strong> in
+            Bandung on <strong>November 1-3, 2024</strong>. It focused on
+            discussing Indonesia's national energy sovereignty issues.
+          </p>
+          <p class="text-gray-700 mt-2">
+            During this competition, I won both <strong>1st place</strong> in
+            videography and <strong>Best Presentation</strong>, focusing on how
+            <strong>renewable energy</strong> can enhance Indonesia's energy
+            independence.
+          </p>
+          <p class="text-gray-700 mt-2">
+            To strengthen my arguments in both the
+            <strong>video production</strong> and <strong>presentation</strong>,
+            I ensured that my topic was <strong>rich in data analysis</strong>.
+            I utilized
+            <strong
+              >quantitative insights, statistical models, and visual
+              analytics</strong
+            >
+            to provide a solid foundation for every claim. This helped in
+            demonstrating
+            <strong>the potential and feasibility of renewable energy</strong>
+            in Indonesia, making my arguments more compelling and
+            evidence-driven.
+          </p>
+          <p class="mt-4 text-gray-700">
+            <strong>Date:</strong> November 1-3, 2024
+          </p>
+        </div>
+      </div>
+
+      <!-- Activity 2: Slideshow (Gambar di Atas, Deskripsi di Bawah) -->
+      <div class="flex flex-col items-center mb-20">
+        <!-- Slideshow Container -->
+        <div
+          x-data="{ currentImage: 0, images: ['activity2_1.jpg', 'activity2_2.jpg', 'activity2_3.jpg', 'activity2_4.jpg'] }"
+          class="relative w-full max-w-4xl"
+        >
+          <div
+            class="relative w-full aspect-[16/9] rounded-lg shadow-lg overflow-hidden"
+          >
+            <img
+              :src="'src/assets/activity/' + images[currentImage]"
+              loading="lazy"
+              class="w-full h-full object-cover transition-opacity duration-500 ease-in-out"
+              alt="Activity Image"
+            />
+          </div>
+
+          <!-- Left Navigation Button -->
+          <button
+            @click="currentImage = (currentImage - 1 + images.length) % images.length"
+            class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 p-3 rounded-full hover:bg-gray-600 text-white"
+          >
+            ◀
+          </button>
+
+          <!-- Right Navigation Button -->
+          <button
+            @click="currentImage = (currentImage + 1) % images.length"
+            class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 p-3 rounded-full hover:bg-gray-600 text-white"
+          >
+            ▶
+          </button>
+        </div>
+
+        <!-- Activity Description -->
+        <div class="mt-8 text-center max-w-3xl">
+          <h3 class="text-2xl font-semibold mb-4 text-gray-900">
+            🎨 Head of Creative Media Department
+          </h3>
+          <p class="text-gray-700">
+            As the <strong>Head of Creative Media</strong> at the
+            <strong>Data Science Student Association (HMSD), ITERA</strong>, I
+            led three main divisions:
+            <strong>Media & Content Specialist</strong>,
+            <strong>Publication & Documentation</strong>, and
+            <strong>Visual Design</strong>. Our team of 19 members worked
+            together to enhance the organization's branding through engaging
+            content on Instagram, TikTok, and YouTube.
+          </p>
+          <p class="text-gray-700 mt-2">
+            Throughout 2024, we successfully developed numerous creative
+            campaigns, including promotional videos, event documentation, and
+            interactive educational content to improve community engagement and
+            organizational visibility.
+          </p>
+          <p class="mt-4 text-gray-700">
+            <strong>Duration:</strong> January - November 2024
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="w-full py-4 bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 bg-opacity-80 backdrop-blur-lg text-center text-gray-700 mt-10"
+    >
+      <p>&copy; 2025 Vana Prastha | All Rights Reserved</p>
+    </footer>
+  </body>
+</html>
