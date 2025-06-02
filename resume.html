@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Resume</title>
+    <title>Resume</title>
     <link rel="icon" type="image/png" href="LOGO.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -81,7 +81,7 @@
     });
     // Event listener untuk resize
     window.addEventListener('resize', () => {
-      if (window.innerWidth >= 768) { 
+      if (window.innerWidth >= 768) {
         open = false;
       }
     });
@@ -100,7 +100,7 @@
         />
       </a>
       <h1 class="text-xl font-bold text-shadow text-left">
-        My Career Path  
+        My Career Path
       </h1>
     </div>
 
@@ -124,8 +124,7 @@
       <li>
         <a href="contact.html" class="hover:text-gray-600 transition">Contact</a>
       </li>
-    </li>
-    <li>
+    <li> <!-- Penutup </li> yang hilang ditambahkan -->
       <a href="article.html" class="hover:text-gray-600 transition">Article</a>
     </li>
     </ul>
@@ -150,6 +149,23 @@
           d="M4 6h16M4 12h16m-7 6h7"
         ></path>
       </svg>
+      <!-- Icon close ditambahkan di sini agar toggle berfungsi baik -->
+      <svg
+        x-show="open"
+        class="w-8 h-8"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        style="display: none;" <!-- Ditambahkan style display none agar tidak muncul bersamaan -->
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"
+        ></path>
+      </svg>
     </button>
   </nav>
 
@@ -164,6 +180,7 @@
     x-transition:leave="transform transition ease-in duration-300"
     x-transition:leave-start="scale-100 opacity-100"
     x-transition:leave-end="scale-50 opacity-0"
+    style="display: none;" <!-- Ditambahkan style display none untuk konsistensi dengan x-show -->
   >
     <nav class="px-3 py-2">
       <ul class="flex flex-col justify-center gap-6 text-gray-900 text-lg font-semibold">
@@ -286,13 +303,13 @@
 
         // Toggle chatbot popup
         chatbotButton.addEventListener("click", () => {
-          chatbotPopup.classList.toggle("visible");
+          chatbotPopup.classList.toggle("visible"); // Seharusnya 'visible' atau kelas lain yang mengatur display
           chatbotPopup.classList.toggle("hidden");
         });
 
         // Close chatbot popup
         closeChatbot.addEventListener("click", () => {
-          chatbotPopup.classList.remove("visible");
+          chatbotPopup.classList.remove("visible"); // Seharusnya 'visible'
           chatbotPopup.classList.add("hidden");
         });
 
@@ -313,7 +330,7 @@
         });
 
         // Function to send message
-        const API_URL = "https://portfolio-Vana Prastha-website.onrender.com/chatbot";
+        const API_URL = "https://portfolio-Vana Prastha-website.onrender.com/chatbot"; // Pastikan URL ini benar
         async function sendMessage() {
           const message = chatInput.value.trim();
           if (!message) return;
@@ -404,7 +421,6 @@
         </div>
       </div>
 
-      
       <!-- Skills -->
       <div class="bg-white p-6 rounded-xl shadow-md hover-card mb-6">
         <h3 class="text-2xl font-semibold mb-4 text-gray-900 flex items-center gap-2">
@@ -457,6 +473,42 @@
         </div>
     </div>
 
+      <!-- Achievements & Scholarships -->
+      <div class="bg-white p-6 rounded-xl shadow-md hover-card mb-6">
+        <h3 class="text-2xl font-semibold mb-4 text-gray-900 flex items-center gap-2">
+            <i class="fas fa-trophy text-accent"></i> Achievements & Scholarships
+        </h3>
+        <div class="space-y-4">
+            <div>
+                <p class="text-gray-700 font-medium">
+                    <strong>Pesantren Mahasiswa Scholarship </strong> -
+                    Yayasan Majlis Amal Sholeh (YAMAS)
+                </p>
+                <p class="text-gray-600">November 2024 - Present</p>
+                <ul class="list-disc pl-5 text-gray-600 mt-2">
+                    <!-- Add list items here if needed -->
+                </ul>
+            </div>
+            <div>
+                <p class="text-gray-700 font-medium">
+                    <strong>Surabaya City government Scholarship</strong> - Pemerintah Daerah kota Surabaya
+                </p>
+                <p class="text-gray-600">August 2024 – Present</p>
+            </div>
+            <div>
+                <p class="text-gray-700 font-medium">
+                    <strong>
+                      Top 10 in the national youth science competition at the novice level </strong> -
+                    LKIR (lomba karya ilmiah remaja) Nasional
+                </p>
+                <p class="text-gray-600">November 2021 </p>
+                <ul class="list-disc pl-5 text-gray-600 mt-2">
+                    <!-- Add list items here if needed -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
       <!-- Experience -->
       <div class="bg-white p-6 rounded-xl shadow-md hover-card mb-6">
         <h3
@@ -473,13 +525,13 @@
             <p class="text-gray-600">January 2025 – Present</p>
             <ul class="list-disc pl-5 text-gray-600 mt-2">
               <li>
-                <strong>Building Good Relationships with External Parties</strong> 
-                <p>Create and strengthen collaborations with companies, 
+                <strong>Building Good Relationships with External Parties</strong>
+                <p>Create and strengthen collaborations with companies,
                 organizations, and other educational institutions.</p>
               </li>
               <li>
-                <strong>Organizing Social Activities for the community</strong> 
-                <p>Create and strengthen collaborations with companies, 
+                <strong>Organizing Social Activities for the community</strong>
+                <p>Create and strengthen collaborations with companies,
                 organizations, and other educational institutions.</p>
               </li>
             </ul>
@@ -492,20 +544,20 @@
             <p class="text-gray-600">September 2024 – Present</p>
             <ul class="list-disc pl-5 text-gray-600 mt-2">
               <li>
-                <strong>Designing Materials for Technical Implementation</strong> 
-                <p>Develop materials required 
-                  for the technical implementation of workshops and seminars. 
-                  This includes creating presentations, practical guides and 
+                <strong>Designing Materials for Technical Implementation</strong>
+                <p>Develop materials required
+                  for the technical implementation of workshops and seminars.
+                  This includes creating presentations, practical guides and
                   other teaching materials that support the effective delivery of information.</p>
               </li>
               <li>
-                <strong>Developing the SRE PENS website</strong> 
+                <strong>Developing the SRE PENS website</strong>
                 <p>The development of the SRE PENS website aims
                   to provide an information platform related to the organization.</p>
               </li>
               <li>
                 <strong>Head of "Sun Power Insight" event</strong> - November 2024
-                <p>Ensure that the event takes place in accordance with the established vision and plan, while coordinating the course of work across all sections of 
+                <p>Ensure that the event takes place in accordance with the established vision and plan, while coordinating the course of work across all sections of
                   the event to ensure effective collaboration and achievement of common goals.</p>
             </ul>
 
@@ -517,11 +569,11 @@
             <p class="text-gray-600">January 2025 – Present</p>
             <ul class="list-disc pl-5 text-gray-600 mt-2">
               <li>
-                <strong>Designing Curriculum</strong> 
-                <p>Design curriculum related to the topics of 
+                <strong>Designing Curriculum</strong>
+                <p>Design curriculum related to the topics of
                   test-based national selection, soft skills, scholarships, and seminars. </p>
               </li>
-              </li>
+              <!-- </li> --> <!-- Tag li penutup yang tidak perlu -->
             </ul>
           </div>
           <div>
@@ -531,8 +583,8 @@
             <p class="text-gray-600">June - August 2024</p>
             <ul class="list-disc pl-5 text-gray-600 mt-2">
               <li>
-                <strong>Designing Sponsorship report</strong> 
-                <p>design sponsorship submission reports, 
+                <strong>Designing Sponsorship report</strong>
+                <p>design sponsorship submission reports,
                   and submit sponsorship reports to the intended companies.
                 </p>
                 </li>
@@ -576,12 +628,12 @@ Regression (LR), and K-Nearest Neighbors (KNN).
           <div>
             <p class="text-gray-700 font-medium">
               <strong
-                >2. Create a web-based program for word summarization from 
+                >2. Create a web-based program for word summarization from
                 documents and visualization classification of frequently occurring words</strong
               >
             </p>
             <p class="text-gray-600">
-              Python, NLTK, Matplotlib, Wordloud,Streamlit Web,Bart Transformers model 
+              Python, NLTK, Matplotlib, Wordloud,Streamlit Web,Bart Transformers model
             </p>
             <ul class="list-disc pl-5 text-gray-600 mt-2">
               <li>
@@ -628,7 +680,7 @@ supervised learning method with k-mean clustering.
             </ul>
             <a href="https://colab.research.google.com/drive/1UxyEe_i8AxT76b7H7v_6BbWNqca7sWtL?usp=sharing" class="inline-block mt-4 px-4 py-2 bg-green-400 text-white rounded hover:opacity-75">
               View
-            </a>  
+            </a>
 
           </div>
           <div>
@@ -645,14 +697,14 @@ python language and decision tree algorithm.
             </ul>
             <a href="https://drive.google.com/file/d/11SEf4wYd8LUpwyEp_C-sLJiZ3Y2_0owU/view?usp=sharing" class="inline-block mt-4 px-4 py-2 bg-green-400 text-white rounded hover:opacity-75">
               View
-            </a>  
+            </a>
 
           </div>
           <div>
             <p class="text-gray-700 font-medium">
               <strong>6. Create a prediction program using the find-s algorithm:</strong>
             </p>
-            <p class="text-gray-600">Python,graphviz, pandas, decision tree</p>
+            <p class="text-gray-600">Python,graphviz, pandas, find-s algorithm</p> <!-- Project 6 duplikat -->
             <ul class="list-disc pl-5 text-gray-600 mt-2">
               <li>
                 This program is used to generate a hypothesis based on
@@ -661,23 +713,7 @@ data/facts entered using the python language and the find-s algorithm.
             </ul>
             <a href="https://drive.google.com/file/d/1Amd8D-LBWWLJH1KRpDRt8W8CeNNQPquW/view?usp=sharing" class="inline-block mt-4 px-4 py-2 bg-green-400 text-white rounded hover:opacity-75">
               View
-            </a>  
-
-          </div>
-          <div>
-            <p class="text-gray-700 font-medium">
-              <strong>6. Create a prediction program using the find-s algorithm:</strong>
-            </p>
-            <p class="text-gray-600">Python,graphviz, pandas, find-s algorithm</p>
-            <ul class="list-disc pl-5 text-gray-600 mt-2">
-              <li>
-                This program is used to generate a hypothesis based on
-data/facts entered using the python language and the find-s algorithm.
-              </li>
-            </ul>
-            <a href="https://drive.google.com/file/d/1Amd8D-LBWWLJH1KRpDRt8W8CeNNQPquW/view?usp=sharing" class="inline-block mt-4 px-4 py-2 bg-green-400 text-white rounded hover:opacity-75">
-              View
-            </a>  
+            </a>
 
           </div>
           <div>
@@ -689,210 +725,168 @@ data/facts entered using the python language and the find-s algorithm.
             <ul class="list-disc pl-5 text-gray-600 mt-2">
               <li>
                 This program is used to perform clustering of iris flower types with 4
-linkage methods which will then be compared. 
+linkage methods which will then be compared.
               </li>
             </ul>
             <a href="https://drive.google.com/file/d/1QHX8BgskiVFZLOVsnFaJlqic61mF1joX/view?usp=sharing" class="inline-block mt-4 px-4 py-2 bg-green-400 text-white rounded hover:opacity-75">
               View
-            </a>  
+            </a>
 
           </div>
         </div>
       </div>
 
-      <!-- Achievements -->
-      <div class="bg-white p-6 rounded-xl shadow-md hover-card mb-6">
+      <!-- Certificates -->
+      <div class="bg-white p-6 rounded-xl shadow-md hover-card"> <!-- mb-6 dihapus karena ini item terakhir dalam section -->
         <h3 class="text-2xl font-semibold mb-4 text-gray-900 flex items-center gap-2">
-            <i class="fas fa-trophy text-accent"></i> Achievements & Scholarships
+          <i class="fas fa-certificate text-accent"></i> Certificates
         </h3>
         <div class="space-y-4">
-            <div>
-                <p class="text-gray-700 font-medium">
-                    <strong>Pesantren Mahasiswa Scholarship </strong> -
-                    Yayasan Majlis Amal Sholeh (YAMAS)
-                </p>
-                <p class="text-gray-600">November 2024 - Present</p>
-                <ul class="list-disc pl-5 text-gray-600 mt-2">
-                    <!-- Add list items here if needed -->
-                </ul>
-            </div>
-            <div>
-                <p class="text-gray-700 font-medium">
-                    <strong>Surabaya City government Scholarship</strong> - Pemerintah Daerah kota Surabaya
-                </p>
-                <p class="text-gray-600">August 2024 – Present</p>
-            </div>
-            <div>
-                <p class="text-gray-700 font-medium">
-                    <strong>
-                      Top 10 in the national youth science competition at the novice level </strong> -
-                    LKIR (lomba karya ilmiah remaja) Nasional 
-                </p>
-                <p class="text-gray-600">November 2021 </p>
-                <ul class="list-disc pl-5 text-gray-600 mt-2">
-                    <!-- Add list items here if needed -->
-                </ul>  
-            </div>
-        </div>
-    </div>
-
-      <!-- Certificates -->
-<div class="bg-white p-6 rounded-xl shadow-md hover-card">
-  <h3 class="text-2xl font-semibold mb-4 text-gray-900 flex items-center gap-2">
-    <i class="fas fa-certificate text-accent"></i> Certificates
-  </h3>
-  <div class="space-y-4">
-    <div>
-      <p class="text-gray-700 font-medium">
-        <strong>1. Get started programming with python</strong>
-      </p>
-      <p class="text-gray-600">Issued: January 6, 2025</p>
-      <ul class="list-disc pl-5 text-gray-600 mt-2">
-        <li>in this class, students are able to create programs with Python using various IDEs 
-          that have been learned, such as Visual Studio Code, Jupyter Notebook, and Google Collaboratory.</li>
-        <li>
-          <a href="https://www.dicoding.com/certificates/07Z63LG9RZQR" class="text-blue-500 hover:underline">Verify Certificate</a>
-        </li>
-      </ul>
-    </div>
-    <div>
-      <p class="text-gray-700 font-medium">
-        <strong>2. Learn Basic AI </strong>
-      </p>
-      <p class="text-gray-600">Issued: January 13, 2025</p>
-      <ul class="list-disc pl-5 text-gray-600 mt-2">
-        <li>in this class, students learn the concept of ai and deep learning.</li>
-        <li>
-          <a href="https://www.dicoding.com/certificates/07Z63507YZQR" class="text-blue-500 hover:underline">Verify Certificate</a>
-        </li>
-      </ul>
-    </div>
-    <div>
-        <p class="text-gray-700 font-medium">
-          <strong>3. Learn Basic Machine Learning </strong>
-        </p>
-        <p class="text-gray-600">Issued: January 18, 2025</p>
-        <ul class="list-disc pl-5 text-gray-600 mt-2">
-          <li>in this class, students learn the concept of supervised unsupervised learning, overfitting,underfitting, and optimization model with tuning hyperparameter.</li>
-          <li>
-            <a href="https://www.dicoding.com/certificates/JLX19G0W5P72" class="text-blue-500 hover:underline">Verify Certificate</a>
-          </li>
-        </ul>
-
-      </div>
-      <div>
-          <p class="text-gray-700 font-medium">
-            <strong>4. Cloud Practitioner esesentials with AWS CLoud</strong>
-          </p>
-          <p class="text-gray-600">Issued: January 18, 2025</p>
-          <ul class="list-disc pl-5 text-gray-600 mt-2">
-            <li>in this class, students can understand AWS 
-              Cloud with all types of services, global infrastructure, and pricing.</li>
-            <li>
-              <a href="https://www.dicoding.com/certificates/1OP82LJYVPQK" class="text-blue-500 hover:underline">Verify Certificate</a>
-            </li>
-          </ul>
-
-        </div>
-        <div>
+          <div>
             <p class="text-gray-700 font-medium">
-              <strong>5. Getting Started Programming With C </strong>
+              <strong>1. Get started programming with python</strong>
             </p>
-            <p class="text-gray-600">Issued: January 17, 2025</p>
+            <p class="text-gray-600">Issued: January 6, 2025</p>
             <ul class="list-disc pl-5 text-gray-600 mt-2">
-              <li>in this class, students are able to create programs with C using various IDEs 
-                that have been learned, such as Glot.io and Replit</li>
+              <li>in this class, students are able to create programs with Python using various IDEs
+                that have been learned, such as Visual Studio Code, Jupyter Notebook, and Google Collaboratory.</li>
               <li>
-                <a href="https://www.dicoding.com/certificates/GRX53K72YZ0M" class="text-blue-500 hover:underline">Verify Certificate</a>
+                <a href="https://www.dicoding.com/certificates/07Z63LG9RZQR" class="text-blue-500 hover:underline">Verify Certificate</a>
               </li>
             </ul>
-
+          </div>
+          <div>
+            <p class="text-gray-700 font-medium">
+              <strong>2. Learn Basic AI </strong>
+            </p>
+            <p class="text-gray-600">Issued: January 13, 2025</p>
+            <ul class="list-disc pl-5 text-gray-600 mt-2">
+              <li>in this class, students learn the concept of ai and deep learning.</li>
+              <li>
+                <a href="https://www.dicoding.com/certificates/07Z63507YZQR" class="text-blue-500 hover:underline">Verify Certificate</a>
+              </li>
+            </ul>
           </div>
           <div>
               <p class="text-gray-700 font-medium">
-                <strong>6. Learn the basics of data visualization </strong>
+                <strong>3. Learn Basic Machine Learning </strong>
               </p>
-              <p class="text-gray-600">Issued: December 26, 2024</p>
+              <p class="text-gray-600">Issued: January 18, 2025</p>
               <ul class="list-disc pl-5 text-gray-600 mt-2">
-                <li>in this class, students can create an effective data visualization 
-                  using Google Sheets according to practical techniques</li>
+                <li>in this class, students learn the concept of supervised unsupervised learning, overfitting,underfitting, and optimization model with tuning hyperparameter.</li>
                 <li>
-                  <a href="https://www.dicoding.com/certificates/07Z6423QMPQR" class="text-blue-500 hover:underline">Verify Certificate</a>
+                  <a href="https://www.dicoding.com/certificates/JLX19G0W5P72" class="text-blue-500 hover:underline">Verify Certificate</a>
                 </li>
               </ul>
 
             </div>
             <div>
                 <p class="text-gray-700 font-medium">
-                  <strong>7. Learn Solid Programming Principles </strong>
+                  <strong>4. Cloud Practitioner esesentials with AWS CLoud</strong>
                 </p>
-                <p class="text-gray-600">Issued: January 18, 2024</p>
+                <p class="text-gray-600">Issued: January 18, 2025</p>
                 <ul class="list-disc pl-5 text-gray-600 mt-2">
-                  <li>understand how to write good code using the OOP (object-priented programming) 
-                    paradigm with reference to industry standards. </li>
+                  <li>in this class, students can understand AWS
+                    Cloud with all types of services, global infrastructure, and pricing.</li>
                   <li>
-                    <a href="https://www.dicoding.com/certificates/JMZVE2YNRPN9" class="text-blue-500 hover:underline">Verify Certificate</a>
+                    <a href="https://www.dicoding.com/certificates/1OP82LJYVPQK" class="text-blue-500 hover:underline">Verify Certificate</a>
                   </li>
                 </ul>
 
               </div>
               <div>
                   <p class="text-gray-700 font-medium">
-                    <strong>8. Getting Started Programming With Java </strong>
+                    <strong>5. Getting Started Programming With C </strong>
                   </p>
-                  <p class="text-gray-600">Issued: January 18, 2024</p>
+                  <p class="text-gray-600">Issued: January 17, 2025</p>
                   <ul class="list-disc pl-5 text-gray-600 mt-2">
-                    <li>in this class, students are able to create programs with Java using various IDEs 
-                      that have been learned, such as Glot.io, Intellij Idea ,and Replit </li>
+                    <li>in this class, students are able to create programs with C using various IDEs
+                      that have been learned, such as Glot.io and Replit</li>
                     <li>
-                      <a href="https://www.dicoding.com/certificates/RVZKW1DLQZD5" class="text-blue-500 hover:underline">Verify Certificate</a>
+                      <a href="https://www.dicoding.com/certificates/GRX53K72YZ0M" class="text-blue-500 hover:underline">Verify Certificate</a>
                     </li>
                   </ul>
 
                 </div>
                 <div>
                     <p class="text-gray-700 font-medium">
-                      <strong>9. Learn the Basics of Project Management </strong>
+                      <strong>6. Learn the basics of data visualization </strong>
                     </p>
-                    <p class="text-gray-600">Issued: January 18, 2024</p>
+                    <p class="text-gray-600">Issued: December 26, 2024</p>
                     <ul class="list-disc pl-5 text-gray-600 mt-2">
-                      <li>In this class, learn about the role of a project manager, 
-                        resume building exercises, understanding the value of a project manager, 
-                        responsibilities of a project manager, cross-functional cooperation, 
-                        and key competencies required by a project manager. </li>
+                      <li>in this class, students can create an effective data visualization
+                        using Google Sheets according to practical techniques</li>
                       <li>
-                        <a href="https://www.dicoding.com/certificates/QLZ931J69Z5D" class="text-blue-500 hover:underline">Verify Certificate</a>
+                        <a href="https://www.dicoding.com/certificates/07Z6423QMPQR" class="text-blue-500 hover:underline">Verify Certificate</a>
                       </li>
                     </ul>
 
                   </div>
                   <div>
                       <p class="text-gray-700 font-medium">
-                        <strong>10. Learn Basic Structured Query Database Language (SQL) </strong>
+                        <strong>7. Learn Solid Programming Principles </strong>
                       </p>
                       <p class="text-gray-600">Issued: January 18, 2024</p>
                       <ul class="list-disc pl-5 text-gray-600 mt-2">
-                        <li>In this class, students learn various basic queries that are often used in managing data 
-                          using structured query language (SQL). </li>
+                        <li>understand how to write good code using the OOP (object-priented programming)
+                          paradigm with reference to industry standards. </li>
                         <li>
-                          <a href="https://www.dicoding.com/certificates/QLZ931J5MZ5D" class="text-blue-500 hover:underline">Verify Certificate</a>
+                          <a href="https://www.dicoding.com/certificates/JMZVE2YNRPN9" class="text-blue-500 hover:underline">Verify Certificate</a>
                         </li>
                       </ul>
 
-    </div>
-  </div>
-</div>
-                           
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>    <!-- Footer -->
+                    </div>
+                    <div>
+                        <p class="text-gray-700 font-medium">
+                          <strong>8. Getting Started Programming With Java </strong>
+                        </p>
+                        <p class="text-gray-600">Issued: January 18, 2024</p>
+                        <ul class="list-disc pl-5 text-gray-600 mt-2">
+                          <li>in this class, students are able to create programs with Java using various IDEs
+                            that have been learned, such as Glot.io, Intellij Idea ,and Replit </li>
+                          <li>
+                            <a href="https://www.dicoding.com/certificates/RVZKW1DLQZD5" class="text-blue-500 hover:underline">Verify Certificate</a>
+                          </li>
+                        </ul>
+
+                      </div>
+                      <div>
+                          <p class="text-gray-700 font-medium">
+                            <strong>9. Learn the Basics of Project Management </strong>
+                          </p>
+                          <p class="text-gray-600">Issued: January 18, 2024</p>
+                          <ul class="list-disc pl-5 text-gray-600 mt-2">
+                            <li>In this class, learn about the role of a project manager,
+                              resume building exercises, understanding the value of a project manager,
+                              responsibilities of a project manager, cross-functional cooperation,
+                              and key competencies required by a project manager. </li>
+                            <li>
+                              <a href="https://www.dicoding.com/certificates/QLZ931J69Z5D" class="text-blue-500 hover:underline">Verify Certificate</a>
+                            </li>
+                          </ul>
+
+                        </div>
+                        <div>
+                            <p class="text-gray-700 font-medium">
+                              <strong>10. Learn Basic Structured Query Database Language (SQL) </strong>
+                            </p>
+                            <p class="text-gray-600">Issued: January 18, 2024</p>
+                            <ul class="list-disc pl-5 text-gray-600 mt-2">
+                              <li>In this class, students learn various basic queries that are often used in managing data
+                                using structured query language (SQL). </li>
+                              <li>
+                                <a href="https://www.dicoding.com/certificates/QLZ931J5MZ5D" class="text-blue-500 hover:underline">Verify Certificate</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+    </section>
+    <!-- Footer -->
     <footer
       class="w-full py-4 bg-gradient-to-r from-gradient1 via-gradient2 to-gradient3 bg-opacity-80 backdrop-blur-lg text-center text-gray-700 mt-10"
     >
-      <p>&copy; 2025 Vana Prastha | All Rights Reserved</p>
+      <p>© 2024 Vana Prastha | All Rights Reserved</p>
     </footer>
   </body>
 </html>
